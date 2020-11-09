@@ -1,0 +1,5 @@
+sv:
+  birthday_wish_mailer:
+    send_birthday_wish:
+      subject: Födelsedagsönskan
+      content: Grattis på födelsedagen %{name}

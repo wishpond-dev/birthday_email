@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+  birthday_wish_mailer:
+    send_birthday_wish:
+      subject: Birthday Wish
+      content: Happy Birthday %{name}
