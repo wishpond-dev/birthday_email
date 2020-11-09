@@ -47,5 +47,8 @@ module WhoIsDoingCodeReview
 
     config.i18n.fallbacks = true
     config.i18n.default_locale = :en
+
+    # Permitted locales available for the application
+    config.i18n.available_locales = [:en, :ar, :sv]
   end
 end

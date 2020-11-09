@@ -33,7 +33,10 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'from@example.com'}
 
   config.action_mailer.perform_caching = false
 
@@ -58,4 +61,20 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.bullet_logger = true
   end
+
+  # Steps for generate secure password for gmail user
+  # 1. When you have activated the Google Authenticator Verification you also need to set up the 2-Step-Authentication in your gmail account.
+  # 2. Therefore visit https://www.google.com/settings/security - when you have done so, just go back to this page and click the “App Password” - Settings. 
+
+  # 3. Select “Other (custom name)” and enter any name you like. Go ahead and copy the code and paste it to your projects settings.
+
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'xxxxxxxx@gmail.com',
+    password:             'xxxxxxxxx',
+    authentication:       'plain'
+  }
+
 end

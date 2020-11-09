@@ -1,0 +1,5 @@
+ar:
+  birthday_wish_mailer:
+    send_birthday_wish:
+      subject: أمنية عيد الميلاد
+      content: عيد مولد سعيد %{name}
