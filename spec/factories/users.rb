@@ -1,11 +1,11 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
 #
 #  id                          :uuid             not null, primary key, indexed => [encrypted_email, encrypted_email_iv]
 #  birthdate                   :date             not null
+#  birthdate_md_format         :string(4)        not null
 #  encrypted_email             :string           indexed => [id, encrypted_email_iv]
 #  encrypted_email_bidx        :string           indexed
 #  encrypted_email_iv          :string           indexed => [id, encrypted_email]
@@ -31,6 +31,7 @@ FactoryBot.define do
     sequence(:username) {|n| "username#{n}" }
     sequence(:email) {|n| "email#{n}@domain.com" }
     sequence(:preferred_name) {|n| "preferred_name#{n}" }
+    sequence(:locale) { [:en, :ja, :fr].sample }
     birthdate { FFaker::Time.date }
   end
 end

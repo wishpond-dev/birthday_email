@@ -33,6 +33,7 @@ class User < ApplicationRecord
 
   before_create :set_uuid
   before_create :create_encryption_key
+  before_save :set_birthdate_md_format
   after_create :save_encryption_key
   after_destroy :delete_encryption_key
 
@@ -43,6 +44,14 @@ class User < ApplicationRecord
   before_validation :monkeypatch_email_bidx
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
+
+  scope :birthday_people_today, lambda do
+      where(birthday: Time.zone.now.strftime('%m%d'))
+  end
+
+  scope :today_birthday_message_receivers, labda do
+    consented_to(Consent.email).birthday_people_today
+  end
 
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx
@@ -87,5 +96,9 @@ class User < ApplicationRecord
 
   def set_uuid
     self.uuid ||= SecureRandom.uuid
+  end
+
+  def set_birthdate_md_format
+    self.birthdate_md_format = birthdate.strftime('%m%d')
   end
 end

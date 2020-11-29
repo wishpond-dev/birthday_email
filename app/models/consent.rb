@@ -40,6 +40,10 @@ class Consent < ApplicationRecord
     users.map(&:preferred_name)
   end
 
+  def self.email
+    find_by!(key: 'email')
+  end
+
   private
 
   def expire_user_consents
