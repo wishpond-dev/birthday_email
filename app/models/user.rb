@@ -49,7 +49,7 @@ class User < ApplicationRecord
       where(birthday: Time.zone.now.strftime('%m%d'))
   end
 
-  scope :today_birthday_message_receivers, labda do
+  scope :today_birthday_email_receivers, labda do
     consented_to(Consent.email).birthday_people_today
   end
 
