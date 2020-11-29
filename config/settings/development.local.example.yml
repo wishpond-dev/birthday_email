@@ -1,0 +1,5 @@
+database:
+  host: localhost
+  database: birthday_email_development
+  username: databse_username
+  password: database_password
