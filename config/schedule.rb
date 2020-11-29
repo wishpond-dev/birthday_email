@@ -28,6 +28,6 @@ set :environment, rails_env
 set :output, "#{Rails.root}/log/cron.log"
 
 every 1.day, at: '0:00 am' do
-  runner "BirthdayEmailJob.perform_now"
+  runner "BirthdayEmailJob.perform_later"
 end
 
