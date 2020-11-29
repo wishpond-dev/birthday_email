@@ -31,7 +31,7 @@
 
 ja:
   activerecord:
-    models:
+    attributes:
       user:
         fallback_username: 'ゲスト'
   users:

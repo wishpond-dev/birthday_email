@@ -85,7 +85,7 @@ class User < ApplicationRecord
   end
 
   def username_for_mail
-    preferred_name || username || I18n.t('activerecord.models.user.fallback_username')
+    preferred_name || username || I18n.t('activerecord.attributes.user.fallback_username')
   end
 
   private
