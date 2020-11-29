@@ -45,13 +45,9 @@ class User < ApplicationRecord
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
 
-  scope :birthday_people_today, lambda do
-      where(birthday: Time.zone.now.strftime('%m%d'))
-  end
+  scope :birthday_people_today,  -> { where(birthday: Time.zone.now.strftime('%m%d')) }
 
-  scope :today_birthday_email_receivers, labda do
-    consented_to(Consent.email).birthday_people_today
-  end
+  scope :today_birthday_email_receivers, -> { consented_to(Consent.email).birthday_people_today }
 
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx

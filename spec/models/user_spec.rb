@@ -39,6 +39,48 @@ RSpec.describe User, type: :model do
     expect(create(:user).export_personal_information).to be_json
   end
 
+  it "birthdate_md_format is set" do
+    data = create(:user)
+    expect(data.birthdate_md_format).to eq data.birthdate.strftime('%m%d')
+  end
+
+  describe "#username_for_mail" do
+    subject { user.username_for_mail }
+
+    context 'preferred_name and username is not set' do
+      let (:user) { build(:user, preferred_name: nil, username: nil) }
+
+      it 'return default username' do
+        is_expected.to eq 'Guest'
+      end
+      context 'locale other than en' do
+        let (:user) { build(:user, preferred_name: nil, username: nil) }
+
+        it 'return default username' do
+          I18n.with_locale(:ja) do
+            is_expected.to eq 'ゲスト'
+          end
+        end
+      end
+    end
+
+    context 'username is set and preferred_name is not set' do
+      let (:user) { build(:user, preferred_name: nil) }
+
+      it 'return default username' do
+        is_expected.to eq user.username
+      end
+    end
+
+    context 'username is set and preferred_name is set' do
+      let (:user) { build(:user) }
+
+      it 'return default username' do
+        is_expected.to eq user.preferred_name
+      end
+    end
+  end
+
   describe "consented_to?" do
     let(:key) { user_consent.consent.key }
 
