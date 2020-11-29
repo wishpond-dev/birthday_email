@@ -51,6 +51,8 @@ gem "sidekiq"
 
 gem "config"
 
+gem "whenever"
+
 group :development, :test do
   gem "annotate"
   gem "awesome_print"
