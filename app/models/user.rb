@@ -79,6 +79,10 @@ class User < ApplicationRecord
     consents.find_by(key: key)
   end
 
+  def username_for_mail
+    preferred_name || username || I18n.t('activerecord.models.user.fallback_username')
+  end
+
   private
 
   def set_uuid

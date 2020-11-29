@@ -3,11 +3,11 @@
 class ApplicationJob < ApplicationJob
   def perform
 
-    targets = User.consented_to(Consent.find_by(key: 'email'))
-      .where(birthday: Time.zone.now)
+    user_ids = User.consented_to(Consent.find_by(key: 'email'))
+      .where(birthday: Time.zone.now).pluck(:id)
 
-    targets.find_each do |target|
-      UserBirthdayMailer.notify(target).deliver_later
+    user_ids.find_each do |user_id|
+      Users::BirthdayMailer.notify(user_id).deliver_later
     end
   end
 end

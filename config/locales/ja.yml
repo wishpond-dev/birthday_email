@@ -29,12 +29,12 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+ja:
   activerecord:
     models:
       user:
-        fallback_username: 'Guest'
+        fallback_username: 'ゲスト'
   users:
     birthday_email_mailer:
       notify:
-        subject: "Happy Birthday, %{username}"
+        subject: "%{username}さん、誕生日おめでとう!"
