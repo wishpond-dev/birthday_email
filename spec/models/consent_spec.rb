@@ -33,4 +33,22 @@ RSpec.describe Consent, type: :model do
     it { expect { consent.update(title_en: "A new thing") }.to change { user_consent.reload.updated_at } }
     # rubocop:enable Lint/AmbiguousBlockAssociation
   end
+
+  describe '.email' do
+
+    subject { described_class.email }
+
+    context 'when email consent exists' do
+      let!(:consent) { create(:consent, key: :email) }
+      it do
+        expect(subject.id).to eq consent.id
+      end
+    end
+
+    context 'when email consent doesn\'t existe' do
+      it do
+        expect { subject.id }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end
