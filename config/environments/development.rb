@@ -58,4 +58,7 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.bullet_logger = true
   end
+
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 end

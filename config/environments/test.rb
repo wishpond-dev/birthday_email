@@ -51,4 +51,6 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.bullet_logger = true
   end
+
+  config.action_mailer.delivery_method = :test
 end

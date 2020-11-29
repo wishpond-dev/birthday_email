@@ -35,6 +35,6 @@ ja:
       user:
         fallback_username: 'ゲスト'
   users:
-    birthday_email_mailer:
+    birthday_mailer:
       notify:
         subject: "%{username}さん、誕生日おめでとう!"
