@@ -49,6 +49,8 @@ gem "bootsnap", ">= 1.1.0", require: false
 #
 gem "sidekiq"
 
+gem "config"
+
 group :development, :test do
   gem "annotate"
   gem "awesome_print"

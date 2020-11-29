@@ -1,0 +1,4 @@
+email:
+  address: 'smtp.gmail.com'
+  domain: 'gmail.com'
+  port: 587
