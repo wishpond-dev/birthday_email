@@ -44,6 +44,12 @@ class User < ApplicationRecord
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
 
+  scope :todays_birthdays_with_consent, -> do
+    consented_to(Consent.find_by(key: 'email'))
+      .where("date_part('day', birthdate) = date_part('day', now())
+      and date_part('month', birthdate) = date_part('month', now())")
+  end
+
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx
     compute_email_bidx
