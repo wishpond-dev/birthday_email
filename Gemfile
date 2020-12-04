@@ -65,6 +65,8 @@ group :development, :test do
   gem "guard-rubocop", require: false
   gem "guard-rubybeautify", require: false
   gem "pg-eyeballs"
+  gem "pry-rails"
+  gem "pry-byebug"
   gem "pry-rescue"
   gem "rspec-rails"
   gem "rubocop"
