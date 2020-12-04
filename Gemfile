@@ -92,6 +92,7 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-json_matcher"
   gem "shoulda-matchers"
+  gem 'whenever-test'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
