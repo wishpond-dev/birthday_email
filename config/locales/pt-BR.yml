@@ -1,0 +1,5 @@
+pt-BR:
+  user_mailer:
+    birthday_email:
+      subject: 'Feliz Aniversário!'
+      content: 'Parabéns %{username}'
