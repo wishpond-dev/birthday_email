@@ -54,4 +54,16 @@ RSpec.describe User, type: :model do
       it { expect(user).not_to be_consented_to(key) }
     end
   end
+
+  describe "todays_birthdays_with_consent" do
+    let!(:user_with_consent) { create(:user, birthdate: DateTime.now) }
+    let!(:user_without_consent) { create(:user, birthdate: DateTime.now) }
+    let!(:consent) { create(:consent, key: 'email', users: [user_with_consent]) }
+
+    subject { described_class.todays_birthdays_with_consent }
+
+    it "expected to bring the users who are doing birthday at current day who consent to send an email" do
+      is_expected.to match_array([user_with_consent])
+    end
+  end
 end
