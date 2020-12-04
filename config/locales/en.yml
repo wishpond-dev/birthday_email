@@ -30,4 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  user_mailer:
+    birthday_email:
+      subject: 'Happy Birthday!'
+      content: 'Happy Birthday %{username}'
