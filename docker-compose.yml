@@ -1,0 +1,41 @@
+version: '2.2'
+services:
+
+  birthday_email:
+    container_name: birthday_email
+    image: birthday_email
+    stdin_open: true
+    tty: true      
+    build: 
+      context: ./
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+
+  postgres:
+    container_name: postgres
+    image: postgres:11.5-alpine
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    env_file:
+      - ./env/postgres.env
+    ports:
+      - "5433:5432"
+  
+  redis:
+    container_name: redis
+    image: redis:6-alpine
+    volumes:
+      - ./data/redis:/data
+    ports: 
+      - "6379:6379"
+    
+
+  mailcatcher:
+    container_name: mailcatcher
+    image: schickling/mailcatcher
+    ports:
+     - "1025:1025"
+     - "1080:1080"
+    restart: always
