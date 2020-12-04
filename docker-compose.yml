@@ -12,6 +12,24 @@ services:
       - "3000:3000"
     volumes:
       - ./:/app
+    depends_on:
+      - postgres
+      - redis
+
+  sidekiq:
+    container_name: sidekiq
+    image: birthday_email
+    stdin_open: true
+    tty: true
+    build:
+      context: ./
+    environment:
+      - SERVICE_TYPE=worker
+    volumes:
+      - ./:/app
+    depends_on:
+      - postgres
+      - redis
 
   postgres:
     container_name: postgres
