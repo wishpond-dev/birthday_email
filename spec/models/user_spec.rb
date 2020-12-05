@@ -56,14 +56,14 @@ RSpec.describe User, type: :model do
   end
 
   describe "todays_birthdays_with_consent" do
-    let!(:birthdays_to_send_email) { described_class.todays_birthdays_with_consent }
+    let!(:user_with_consent) { create(:user, birthdate: Time.zone.now) }
+    let!(:user_without_consent) { create(:user, birthdate: Time.zone.now) }
+    let!(:consent) { create(:consent, key: "email", users: [user_with_consent]) }
 
-    let(:user_with_consent) { create(:user, birthdate: Time.zone.now) }
-    let(:user_without_consent) { create(:user, birthdate: Time.zone.now) }
-    let(:consent) { create(:consent, key: "email", users: [user_with_consent]) }
+    subject { described_class.todays_birthdays_with_consent }
 
     it "expected to bring the users who are doing birthday at current day who consent to send an email" do
-      expect(birthdays_to_send_email).to match_array([user_with_consent])
+      expect(subject).to match_array([user_with_consent])
     end
   end
 end
