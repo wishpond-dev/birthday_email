@@ -58,7 +58,8 @@ RSpec.describe User, type: :model do
   describe "todays_birthdays_with_consent" do
     let!(:user_with_consent) { create(:user, birthdate: Time.zone.now) }
     let!(:user_without_consent) { create(:user, birthdate: Time.zone.now) }
-    let!(:consent) { create(:consent, key: "email", users: [user_with_consent]) }
+    let!(:user_with_consent_and_tomorrow_birthday) { create(:user, birthdate: Time.zone.now + 1.day) }
+    let!(:consent) { create(:consent, key: "email", users: [user_with_consent, user_with_consent_and_tomorrow_birthday]) }
 
     subject { described_class.todays_birthdays_with_consent }
 
