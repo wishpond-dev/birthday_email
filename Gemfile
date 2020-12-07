@@ -11,8 +11,8 @@ gem "dotenv-rails", groups: %i[development test], require: "dotenv/rails-now"
 gem "rails", "~> 5.2"
 
 gem "attr_encrypted" # and this we will use for per field encryption
-gem "blind_index"
-gem "lockbox"
+# gem "blind_index"
+# gem "lockbox"
 gem "rbnacl"
 
 # Use postgresql as the database for Active Record
@@ -47,6 +47,10 @@ gem "bootsnap", ">= 1.1.0", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+gem 'sidekiq'
+gem 'faker'
+gem 'sendgrid-ruby'
+
 group :development, :test do
   gem "annotate"
   gem "awesome_print"
@@ -74,6 +78,7 @@ group :development, :test do
   gem "ruby-growl"
   gem "rubycritic"
   gem "uniform_notifier"
+  gem 'pry-rails'
 end
 
 group :development do

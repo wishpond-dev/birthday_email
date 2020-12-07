@@ -27,20 +27,21 @@
 #
 
 class User < ApplicationRecord
-  include Encryptable
-  attr_encrypted :email, :preferred_name, :username, default_crypto_options
-  blind_index :email, key: blind_index_key, expression: ->(v) { v.downcase }
+  # include Encryptable
+  # attr_encrypted :email, :preferred_name, :username, default_crypto_options
+  # blind_index :email, key: blind_index_key, expression: ->(v) { v.downcase }
 
   before_create :set_uuid
-  before_create :create_encryption_key
-  after_create :save_encryption_key
-  after_destroy :delete_encryption_key
+  # before_create :create_encryption_key
+  # after_create :save_encryption_key
+  # after_destroy :delete_encryption_key
 
   has_many :user_consents, -> { consented.up_to_date }, inverse_of: :user, dependent: :destroy
   has_many :consents, through: :user_consents, inverse_of: :users
 
-  validates :email, uniqueness: {case_sensitive: false}
-  before_validation :monkeypatch_email_bidx
+  # validates :email, uniqueness: {case_sensitive: false}
+  validates :encrypted_email, uniqueness: {case_sensitive: false}
+  # before_validation :monkeypatch_email_bidx
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
 
