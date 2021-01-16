@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+  emails:
+    birthday_email:
+      subject: "Happy Birthday Placeholder Subject"
+      message: "Happy Birthday Placeholder Message"

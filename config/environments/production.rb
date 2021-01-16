@@ -76,6 +76,8 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+  BIRTHDAY_ANNOUNCEMENT_EMAIL_FROM = "rptasznik@gmail.com"
+
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter

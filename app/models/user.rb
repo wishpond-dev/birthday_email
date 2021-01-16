@@ -43,6 +43,7 @@ class User < ApplicationRecord
   before_validation :monkeypatch_email_bidx
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
+  scope :has_birthday_today, -> { where(birthdate: Time.zone.today) }
 
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx

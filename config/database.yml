@@ -5,7 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: who_is_doing_code_review_development
+  database: birthday_email
+  pool: 5
+  username: postgres
+  password: 19Kinzsatp
+  port: 5433
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
