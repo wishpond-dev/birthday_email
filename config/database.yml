@@ -8,7 +8,7 @@ development:
   database: birthday_email
   pool: 5
   username: postgres
-  password: 19Kinzsatp
+  password: password_here
   port: 5433
 
   # The specified database role being used to connect to postgres.
@@ -43,7 +43,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: who_is_doing_code_review_test
+  database: birthday_email_test
+  pool: 5
+  username: postgres
+  password: password_here
+  port: 5433
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

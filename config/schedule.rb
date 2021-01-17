@@ -21,7 +21,7 @@
 set :output, "log/cron.log"
 
 
-
-every 1.day, at: '7:13 pm' do
-  rake "users:birthday_email"
+# need to set environment to dev for now to avoid master.key error when in production mode
+every 1.day, at: '11:06 am' do
+  rake "users:birthday_email", environment: "development"
 end

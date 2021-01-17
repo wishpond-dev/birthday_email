@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-require "sendgrid-ruby"
-
 class SendBirthdayEmailsJob < ApplicationJob
-  include SendGrid
-
   queue_as :default
 
   def perform(*)

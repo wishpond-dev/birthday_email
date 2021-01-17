@@ -46,6 +46,23 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # mailer configuration related to birthday email feature
+  BIRTHDAY_ANNOUNCEMENT_EMAIL_FROM = "rptasznik@gmail.com"
+
+  config.action_mailer.perform_deliveries = true
+
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'apikey',
+    :password => ENV['SENDGRID_API_KEY'],
+    :domain => 'rptasznik@gmail.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
+  config.active_job.queue_adapter = :sidekiq
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.console = true

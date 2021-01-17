@@ -27,11 +27,12 @@ gem "redis-namespace"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# for running jobs
+gem "sidekiq"
 # sendgrid for sending emails
 gem "sendgrid-ruby"
-# for scheduling jobs / updating crontab file 
+# for scheduling jobs / updating crontab file
 gem "whenever", require: false
-gem "sidekiq"
 
 gem "knock"
 

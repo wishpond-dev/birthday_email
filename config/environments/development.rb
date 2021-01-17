@@ -53,6 +53,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # mailer configuration related to birthday email feature
   BIRTHDAY_ANNOUNCEMENT_EMAIL_FROM = "rptasznik@gmail.com"
 
   config.action_mailer.delivery_method = :smtp
