@@ -19,7 +19,7 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock /app/
 
-RUN gem install bundler foreman &&\
+RUN gem install bundler foreman mailcatcher &&\
     bundle install
 
 VOLUME /bundle
@@ -27,7 +27,8 @@ VOLUME /bundle
 COPY . /app
 
 EXPOSE 3000
+EXPOSE 1080
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-CMD bundle exec rails s -b 0.0.0.0 -p 3000
+CMD foreman start -f Procfile.dev
