@@ -2,13 +2,15 @@ FROM ruby:2.5.1
 
 ENV BUNDLE_PATH=/bundle/vendor
 
-RUN apt-get update -qq \
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 && \
+  echo "deb http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse" > /etc/apt/sources.list && \
+  apt-get update -qq \
     && apt-get install -y \
         build-essential \
         liblzma-dev \
         libnss3 \
         libpq-dev \
-        libsodium-dev \
+        libsodium23 \
         postgresql-client \
         unzip \
         xvfb \
