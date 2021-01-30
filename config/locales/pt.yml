@@ -29,9 +29,9 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+pt:
   user_mailer:
     birthday_email:
-      subject: 'Happy birthday'
-      content: 'change config/locales/en.yml to add a proper message.'
+      subject: 'Feliz aniversario!'
+      content: 'altere config/locales/pt.yml para adicionar uma mensagem apropriada.'
 

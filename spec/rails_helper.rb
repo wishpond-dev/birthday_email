@@ -8,8 +8,12 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require "rspec/json_matcher"
+require 'sidekiq/testing'
 Dir[Rails.root.join("spec/support/*.rb")].each { |f| require f }
 Dir[Rails.root.join("spec/shared_examples/*.rb")].each { |f| require f }
+
+Sidekiq::Testing.fake!
+ActiveJob::Base.queue_adapter = :test
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

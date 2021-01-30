@@ -54,4 +54,19 @@ RSpec.describe User, type: :model do
       it { expect(user).not_to be_consented_to(key) }
     end
   end
+
+  describe "consented_and_on_bday" do
+    let!(:consent) { create :consent, key: 'email' }
+    let!(:bday_user) { FactoryBot.create(:user, birthdate: Date.today) }
+    let!(:bday_user2) { FactoryBot.create(:user, birthdate: Date.today) }
+    let!(:user_consent) { create :user_consent, :consented, user: user, consent: consent }
+    let!(:user_consent_bday) { create :user_consent, :consented, user: bday_user, consent: consent }
+    let!(:user_not_consent_bday) { create :user_consent, user: bday_user2 }
+
+    it 'return only conseted user on bday' do
+      expect(User.consented_and_on_bday).to include(bday_user)
+      expect(User.consented_and_on_bday).to_not include(bday_user2)
+      expect(User.consented_and_on_bday).to_not include(user)
+    end
+  end
 end
