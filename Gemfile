@@ -14,6 +14,7 @@ gem "attr_encrypted" # and this we will use for per field encryption
 gem "blind_index"
 gem "lockbox"
 gem "rbnacl"
+gem 'whenever', require: false
 
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
