@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Email
   module Service
     class DispatchBirthdayCampaign
@@ -29,7 +31,7 @@ module Email
       end
 
       def schedule_email_job(user_id)
-        puts "#{__method__}: #{user_id}"
+        BirthdayCampaignJob.perform_later(user_id)
       end
     end
   end
