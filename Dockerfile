@@ -6,7 +6,7 @@ RUN apk add --no-cache libpq postgresql-dev
 
 RUN bundle config build.nokogiri --use-system-libraries
 
-ENV APP_HOME /steep/
+ENV APP_HOME /birthday_email/
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
