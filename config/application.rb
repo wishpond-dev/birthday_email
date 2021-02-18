@@ -41,6 +41,9 @@ module WhoIsDoingCodeReview
       g.orm :active_record, primary_key_type: :uuid
     end
 
+    config.autoload_paths += %W[#{config.root}/lib]
+    config.eager_load_paths += %W[#{config.root}/lib]
+
     config.after_initialize do
       Rails.application.credentials.env = RailsEnv.new
     end

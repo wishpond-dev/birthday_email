@@ -32,4 +32,5 @@ services:
       - 3000:3000
     environment:
       - RAILS_ENV=development
+      - REDIS_HOST=redis://redis:6379/0
   
