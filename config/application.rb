@@ -50,5 +50,6 @@ module WhoIsDoingCodeReview
 
     config.i18n.fallbacks = true
     config.i18n.default_locale = :en
+    config.i18n.available_locales = %w(en pt-BR)
   end
 end
