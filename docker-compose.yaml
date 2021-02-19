@@ -21,6 +21,8 @@ services:
     environment:
       - RAILS_ENV=test
       - REDIS_HOST=redis://redis:6379/0
+    env_file:
+      - .env.development
     stdin_open: true
     tty: true
 
@@ -33,4 +35,6 @@ services:
     environment:
       - RAILS_ENV=development
       - REDIS_HOST=redis://redis:6379/0
+    env_file:
+      - .env.development
   
