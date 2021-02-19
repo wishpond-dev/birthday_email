@@ -48,6 +48,8 @@ module WhoIsDoingCodeReview
       Rails.application.credentials.env = RailsEnv.new
     end
 
+    Rails.application.config.active_job.queue_adapter = :async
+
     config.i18n.fallbacks = true
     config.i18n.default_locale = :en
     config.i18n.available_locales = %w(en pt-BR)
