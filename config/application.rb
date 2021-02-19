@@ -48,7 +48,7 @@ module WhoIsDoingCodeReview
       Rails.application.credentials.env = RailsEnv.new
     end
 
-    Rails.application.config.active_job.queue_adapter = :async
+    config.active_job.queue_adapter = :sidekiq
 
     config.i18n.fallbacks = true
     config.i18n.default_locale = :en

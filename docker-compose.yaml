@@ -26,6 +26,10 @@ services:
     stdin_open: true
     tty: true
 
+  sidekiq:
+    <<: *base
+    command: bundle exec sidekiq
+
   web:
     <<: *base
     build: .

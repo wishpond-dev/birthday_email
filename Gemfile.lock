@@ -222,6 +222,8 @@ GEM
     public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.6)
+    rack-protection (2.1.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.2.1)
@@ -335,6 +337,11 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
+    sidekiq (6.0.7)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -416,6 +423,7 @@ DEPENDENCIES
   ruby-growl
   rubycritic
   shoulda-matchers
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

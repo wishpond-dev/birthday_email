@@ -27,6 +27,8 @@ gem "redis-namespace"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem "sidekiq"
+
 gem "knock"
 
 gem "base62-rb"

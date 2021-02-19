@@ -12,7 +12,7 @@ module Email
         connection.set_single_row_mode
 
         connection.get_result.stream_each do |user|
-          schedule_email_job(user["id"])
+          schedule_email_job(user["user_id"])
         end
       end
 
