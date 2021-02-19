@@ -37,7 +37,7 @@ class CampaignsController < ApplicationController
 
   # DELETE /campaigns/1
   def destroy
-    campaign.destroy
+    @campaign.destroy
   end
 
   private
@@ -47,8 +47,9 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def campaign_params
-    params.fetch(:campaign, {})
+    params.require(:campaign)
+          .permit(:subject, :subject_en, :subject_ptbr, :body, :body_en,
+                  :body_ptbr, :key)
   end
 end
