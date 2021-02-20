@@ -29,6 +29,8 @@ gem "redis-namespace"
 
 gem "sidekiq"
 
+gem 'mailgun-ruby'
+
 gem "knock"
 
 gem "base62-rb"

@@ -40,13 +40,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: 'catalyst.test:3000', protocol: 'http' }
 
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => ENV.fetch("GMAIL_USERNAME"),
-    :password             => ENV.fetch("GMAIL_PASSWORD"),
-    :authentication       => "plain",
-    :enable_starttls_auto => true
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV.fetch('MAILGUN_APIKEY'),
+    domain: ENV.fetch('MAILGUN_DOMAIN'),
   }
 
   # Print deprecation notices to the Rails logger.

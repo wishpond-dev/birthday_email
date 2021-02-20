@@ -28,7 +28,10 @@ services:
 
   sidekiq:
     <<: *base
-    command: bundle exec sidekiq
+    command: bundle exec sidekiq -C config/sidekiq.yaml
+    environment:
+      - RAILS_ENV=development
+      - REDIS_HOST=redis://redis:6379/0
 
   web:
     <<: *base
