@@ -81,11 +81,7 @@ class User < ApplicationRecord
 
   def users_birthday?
     today = Time.zone.today
-    this_year = today.year
-    days = [this_year-1, this_year, this_year+1].map { |year|
-      (Date.new(year, birthdate.month, birthdate.day) - today) }.min_by(&:abs)
-
-    days.zero?
+    birthdate.month == today.month && birthdate.day == today.day
   end
 
   private
