@@ -79,13 +79,13 @@ class User < ApplicationRecord
     consents.find_by(key: key)
   end
 
-  def users_birthday?(birthdate)
-    today = Date.today
+  def users_birthday?
+    today = Time.zone.today
     this_year = today.year
     days = [this_year-1, this_year, this_year+1].map { |year|
       (Date.new(year, birthdate.month, birthdate.day) - today) }.min_by(&:abs)
 
-    return days == 0
+    days.zero?
   end
 
   private

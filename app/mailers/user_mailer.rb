@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 class UserMailer < ApplicationMailer
-  default from: 'noreply@waterpound.com'
+  default from: "noreply@wishpond.com"
 
   def birthday_wish
     @user = params[:user]
-    @url  = 'http://example.com/login'
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: t('mail.subject'))
+      mail(to: @user.email, subject: t("mail.subject"))
     end
   end
 
