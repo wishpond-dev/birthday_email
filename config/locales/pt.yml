@@ -1,0 +1,6 @@
+
+pt:
+  user_mailer:
+    birthdate_email:    
+      subject_mail: "Email de aniversario"
+      birthday_message: "Feliz aniversario %{username}!"
