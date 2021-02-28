@@ -1,0 +1,5 @@
+fr:
+  hello: Bonjour
+  mail:
+    subject: joyeux anniversaire
+    body: Bonjour %{name} joyeux anniversaire

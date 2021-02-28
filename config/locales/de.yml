@@ -1,0 +1,5 @@
+de:
+  hello: Hallo
+  mail:
+    subject: alles Gute zum Geburtstag
+    body: Hallo %{name} alles Gute zum Geburtstag

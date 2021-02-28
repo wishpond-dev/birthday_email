@@ -1,0 +1,5 @@
+it:
+  hello: Ciao
+  mail:
+    subject: Buon compleanno
+    body: Ciao %{name} Buon compleanno

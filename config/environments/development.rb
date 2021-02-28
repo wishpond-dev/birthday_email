@@ -58,4 +58,18 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.bullet_logger = true
   end
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'no-reply@example.com'}
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            ENV['user_name'],
+    password:             ENV['password'],
+    authentication:       'plain'
+  }
 end
