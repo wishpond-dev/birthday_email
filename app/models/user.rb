@@ -79,6 +79,11 @@ class User < ApplicationRecord
     consents.find_by(key: key)
   end
 
+  def users_birthday?
+    today = Time.zone.today
+    birthdate.month == today.month && birthdate.day == today.day
+  end
+
   private
 
   def set_uuid
