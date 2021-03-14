@@ -51,6 +51,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "sidekiq"
 gem "sidekiq-cron"
 
+# rubocop:disable Metrics/BlockLength
 group :development, :test do
   gem "annotate"
   gem "awesome_print"
@@ -79,6 +80,7 @@ group :development, :test do
   gem "ruby-growl"
   gem "uniform_notifier"
 end
+# rubocop:enable Metrics/BlockLength
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.2"

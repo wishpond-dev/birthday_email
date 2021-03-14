@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
@@ -25,7 +27,7 @@ RSpec.describe UserMailer, type: :mailer do
 
     context "without default locale" do
       before do
-        user.update_column(:locale, "pt")
+        user.update(locale: "pt")
       end
 
       it "renders the subject" do

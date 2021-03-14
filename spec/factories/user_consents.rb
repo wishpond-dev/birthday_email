@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
 # == Schema Information
 #
 # Table name: user_consents
@@ -19,6 +20,7 @@
 #  index_user_consents_on_user_id     (user_id)
 #  valid_consents                     (consented,up_to_date,user_id,id) WHERE ((consented = true) AND (up_to_date = true))
 #
+# rubocop:enable Layout/LineLength
 
 FactoryBot.define do
   factory :user_consent do
