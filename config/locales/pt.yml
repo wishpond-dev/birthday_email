@@ -3,4 +3,4 @@ pt:
   user_mailer:
       birthday_email:
           subject: "Exemplo de assunto de email de aniversário"
-          content: "Exemplo de mensagem de Feliz aniversário para %{preferred_name}"
+          content: "Exemplo de mensagem de Feliz aniversário para %{username}"

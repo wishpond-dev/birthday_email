@@ -3,4 +3,4 @@ en:
   user_mailer:
       birthday_email:
           subject: "Happy Birthday example subject"
-          content: "Happy birthday message example for %{preferred_name}"
+          content: "Happy birthday message example for %{username}"

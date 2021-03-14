@@ -80,6 +80,10 @@ class User < ApplicationRecord
     consents.find_by(key: key)
   end
 
+  def email_username
+    preferred_name || username
+  end
+
   private
 
   def set_uuid

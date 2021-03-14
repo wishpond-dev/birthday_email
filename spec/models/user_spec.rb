@@ -54,4 +54,22 @@ RSpec.describe User, type: :model do
       it { expect(user).not_to be_consented_to(key) }
     end
   end
+
+  describe "email_username" do
+    context "when user has preferred_name" do
+      let(:preferred_name) { "preferred_name" }
+
+      before { subject.update(preferred_name: preferred_name) }
+
+      it { expect(subject.email_username).to eq(preferred_name) }
+    end
+
+    context "when user doesn't have preferred_name" do
+      let(:username) { "username" }
+
+      before { subject.update(preferred_name: nil, username: username) }
+
+      it { expect(subject.email_username).to eq(username) }
+    end
+  end
 end
