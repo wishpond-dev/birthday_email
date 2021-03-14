@@ -36,4 +36,4 @@ module GdprExtension
 end
 
 # include the extension
-ActiveRecord::Base.send(:include, GdprExtension)
+ActiveRecord::Base.include GdprExtension

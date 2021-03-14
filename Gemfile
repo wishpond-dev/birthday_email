@@ -74,9 +74,9 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-rails_config"
   gem "rubocop-rspec"
+  gem "rubycritic"
   gem "ruby-debug-ide"
   gem "ruby-growl"
-  gem "rubycritic"
   gem "uniform_notifier"
 end
 

@@ -28,7 +28,7 @@ module Encryptable
   # Gotta clean up the :reek:TooManyStatements
   # rubocop:disable Naming/AccessorMethodName
   def get_or_generate_encryption_key
-    if self.class.name == "User"
+    if instance_of?(User)
       return redis_connection.get(encryption_key_id) if persisted?
 
       return create_encryption_key
@@ -77,7 +77,7 @@ module Encryptable
   end
 
   def encryption_key_id
-    return uuid if self.class.name == "User" && defined?(uuid)
+    return uuid if instance_of?(User) && defined?(uuid)
 
     user.try(:uuid)
   end

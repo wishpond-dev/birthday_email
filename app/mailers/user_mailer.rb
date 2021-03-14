@@ -4,9 +4,8 @@ class UserMailer < ApplicationMailer
   def birthday_email(user)
     @user = user
     locale = user.locale || I18n.default_locale
-    I18n.with_locale(locale) do 
+    I18n.with_locale(locale) do
       mail(to: @user.email)
     end
-
   end
 end

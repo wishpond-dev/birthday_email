@@ -10,4 +10,4 @@ module UuidExtension
 end
 
 # include the extension
-ApplicationRecord.send(:include, UuidExtension)
+ApplicationRecord.include UuidExtension
