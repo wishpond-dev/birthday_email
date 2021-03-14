@@ -21,6 +21,7 @@
 #
 # Indexes
 #
+#  index_user_on_bithdate_day_of_year   (date_part('doy'::text, birthdate))
 #  index_users_on_encrypted_email_bidx  (encrypted_email_bidx)
 #  index_users_on_uuid                  (uuid) UNIQUE
 #  user_email                           (id,encrypted_email,encrypted_email_iv)
@@ -52,6 +53,22 @@ RSpec.describe User, type: :model do
       let(:user_consent) { create :user_consent, user: user }
 
       it { expect(user).not_to be_consented_to(key) }
+    end
+  end
+
+  describe "born_in" do
+    let(:born_in) { 1.day.ago }
+
+    context "when user born in the queried day" do
+      let(:user) { create :user, birthdate: born_in }
+
+      it { expect(User.born_in(born_in.yday)).to eq [user] }
+    end
+
+    context "when no user born in the queried day" do
+      before { create :user, birthdate: Time.zone.today }
+
+      it { expect(User.born_in(born_in.yday)).to be_empty }
     end
   end
 

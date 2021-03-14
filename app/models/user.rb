@@ -21,6 +21,7 @@
 #
 # Indexes
 #
+#  index_user_on_bithdate_day_of_year   (date_part('doy'::text, birthdate))
 #  index_users_on_encrypted_email_bidx  (encrypted_email_bidx)
 #  index_users_on_uuid                  (uuid) UNIQUE
 #  user_email                           (id,encrypted_email,encrypted_email_iv)
