@@ -2,11 +2,14 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  port: 5432
 
-development:
+development: &development
   <<: *default
-  database: who_is_doing_code_review_development
-
+  database: wishpond
+  username: <%= ENV['WISHPOND_USERNAME'] %>
+  password: <%= ENV['WISHPOND_PASSWORD'] %>
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -38,8 +41,8 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: who_is_doing_code_review_test
+  <<: *development
+  database: wishpond_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
