@@ -62,13 +62,13 @@ RSpec.describe User, type: :model do
     context "when user born in the queried day" do
       let(:user) { create :user, birthdate: born_in }
 
-      it { expect(User.born_in(born_in.yday)).to eq [user] }
+      it { expect(described_class.born_in(born_in.yday)).to eq [user] }
     end
 
     context "when no user born in the queried day" do
       before { create :user, birthdate: Time.zone.today }
 
-      it { expect(User.born_in(born_in.yday)).to be_empty }
+      it { expect(described_class.born_in(born_in.yday)).to be_empty }
     end
   end
 
@@ -76,17 +76,17 @@ RSpec.describe User, type: :model do
     context "when user has preferred_name" do
       let(:preferred_name) { "preferred_name" }
 
-      before { subject.update(preferred_name: preferred_name) }
+      before { user.update(preferred_name: preferred_name) }
 
-      it { expect(subject.email_username).to eq(preferred_name) }
+      it { expect(user.email_username).to eq(preferred_name) }
     end
 
     context "when user doesn't have preferred_name" do
       let(:username) { "username" }
 
-      before { subject.update(preferred_name: nil, username: username) }
+      before { user.update(preferred_name: nil, username: username) }
 
-      it { expect(subject.email_username).to eq(username) }
+      it { expect(user.email_username).to eq(username) }
     end
   end
 end

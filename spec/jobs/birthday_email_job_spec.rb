@@ -36,7 +36,7 @@ RSpec.describe BirthdayEmailJob, type: :job do
         user.update(birthdate: today)
       end
 
-      it "sends two emails" do
+      it "does not send emails" do
         expect { described_class.perform_now(today.yday) }
           .to change { ActionMailer::Base.deliveries.count }.by(0)
       end
@@ -50,7 +50,7 @@ RSpec.describe BirthdayEmailJob, type: :job do
         user.update(birthdate: today)
       end
 
-      it "sends two emails" do
+      it "sends one email" do
         expect { described_class.perform_now(today.yday) }
           .to change { ActionMailer::Base.deliveries.count }.by(1)
       end
