@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_03_14_194929) do
     t.string "encrypted_email_bidx"
     t.date "birthdate", null: false
     t.string "locale", default: "en", null: false
-    t.index "date_part('doy'::text, birthdate)", name: "index_user_on_bithdate_day_of_year"
+    t.index "(((date_part('day'::text, birthdate) || '-'::text) || date_part('month'::text, birthdate)))", name: "index_user_on_birthdate_day_and_month"
     t.index ["encrypted_email_bidx"], name: "index_users_on_encrypted_email_bidx"
     t.index ["id", "encrypted_email", "encrypted_email_iv"], name: "user_email"
     t.index ["uuid"], name: "index_users_on_uuid", unique: true

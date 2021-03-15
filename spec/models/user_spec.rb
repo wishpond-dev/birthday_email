@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Layout/LineLength
 # == Schema Information
 #
 # Table name: users
@@ -21,11 +22,12 @@
 #
 # Indexes
 #
-#  index_user_on_bithdate_day_of_year   (date_part('doy'::text, birthdate))
-#  index_users_on_encrypted_email_bidx  (encrypted_email_bidx)
-#  index_users_on_uuid                  (uuid) UNIQUE
-#  user_email                           (id,encrypted_email,encrypted_email_iv)
+#  index_user_on_birthdate_day_and_month  ((((date_part('day'::text, birthdate) || '-'::text) || date_part('month'::text, birthdate))))
+#  index_users_on_encrypted_email_bidx    (encrypted_email_bidx)
+#  index_users_on_uuid                    (uuid) UNIQUE
+#  user_email                             (id,encrypted_email,encrypted_email_iv)
 #
+# rubocop:enable Layout/LineLength
 
 require "rails_helper"
 
@@ -57,23 +59,23 @@ RSpec.describe User, type: :model do
   end
 
   describe "born_in" do
-    let(:born_in) { 1.day.ago }
+    let(:born_in) { 3.days.ago }
 
     context "when user born in the queried day" do
       let(:user) { create :user, birthdate: born_in }
 
-      it { expect(described_class.born_in(born_in.yday)).to eq [user] }
+      it { expect(described_class.born_in(born_in.day, born_in.month)).to eq [user] }
     end
 
     context "when no user born in the queried day" do
       before { create :user, birthdate: Time.zone.today }
 
-      it { expect(described_class.born_in(born_in.yday)).to be_empty }
+      it { expect(described_class.born_in(born_in.day, born_in.month)).to be_empty }
     end
   end
 
   describe "consented_email_and_birthday_in" do
-    let(:born_in) { 1.day.ago }
+    let(:born_in) { 3.days.ago }
 
     context "when user born in the queried day and consented email" do
       let(:user) { create :user, birthdate: born_in }
@@ -82,7 +84,7 @@ RSpec.describe User, type: :model do
 
       before { consent.update(key: "email") }
 
-      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to eq [user] }
+      it { expect(described_class.consented_email_and_birthday_in(born_in.day, born_in.month)).to eq [user] }
     end
 
     context "when user born in the queried day and didn't consented email" do
@@ -91,7 +93,7 @@ RSpec.describe User, type: :model do
 
       before { user_consent.consent }
 
-      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to be_empty }
+      it { expect(described_class.consented_email_and_birthday_in(born_in.day, born_in.month)).to be_empty }
     end
 
     context "when user born in the queried day and consented name" do
@@ -101,13 +103,13 @@ RSpec.describe User, type: :model do
 
       before { consent.update(key: "name") }
 
-      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to be_empty }
+      it { expect(described_class.consented_email_and_birthday_in(born_in.day, born_in.month)).to be_empty }
     end
 
     context "when no user born in the queried day" do
       before { create :user, birthdate: Time.zone.today }
 
-      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to be_empty }
+      it { expect(described_class.consented_email_and_birthday_in(born_in.day, born_in.month)).to be_empty }
     end
   end
 
@@ -130,16 +132,14 @@ RSpec.describe User, type: :model do
   end
 
   describe "valid_location" do
-    let(:born_in) { 1.day.ago }
-
     context "when locate is a valid I18n location" do
-      let(:user) { create :user, birthdate: born_in, locale: "pt" }
+      let(:user) { create :user, locale: "pt" }
 
       it { expect(user.valid_location).to eq :pt }
     end
 
     context "when locate is an invalid I18n location" do
-      let(:user) { create :user, birthdate: born_in, locale: "de" }
+      let(:user) { create :user, locale: "de" }
 
       it { expect(user.valid_location).to eq :en }
     end
