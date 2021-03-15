@@ -47,6 +47,11 @@ gem "bootsnap", ">= 1.1.0", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+# Use sidekiq as backend for ActiveJob
+gem "sidekiq"
+gem "sidekiq-cron"
+
+# rubocop:disable Metrics/BlockLength
 group :development, :test do
   gem "annotate"
   gem "awesome_print"
@@ -70,11 +75,12 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-rails_config"
   gem "rubocop-rspec"
+  gem "rubycritic"
   gem "ruby-debug-ide"
   gem "ruby-growl"
-  gem "rubycritic"
   gem "uniform_notifier"
 end
+# rubocop:enable Metrics/BlockLength
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.2"

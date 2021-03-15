@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocob:disable Layout/LineLength
 # == Schema Information
 #
 # Table name: users
@@ -21,10 +22,14 @@
 #
 # Indexes
 #
-#  index_users_on_encrypted_email_bidx  (encrypted_email_bidx)
-#  index_users_on_uuid                  (uuid) UNIQUE
-#  user_email                           (id,encrypted_email,encrypted_email_iv)
+#  index_user_on_birthdate_day_and_month  ((((date_part('day'::text, birthdate) || '-'::text) || date_part('month'::text
+#  , birthdate))))
+#  index_users_on_encrypted_email_bidx    (encrypted_email_bidx)
+#  index_users_on_uuid                    (uuid) UNIQUE
+#  user_email                             (id,encrypted_email,encrypted_email_iv)
 #
+
+# rubocob:disable Layout/LineLength
 
 class User < ApplicationRecord
   include Encryptable
@@ -43,6 +48,14 @@ class User < ApplicationRecord
   before_validation :monkeypatch_email_bidx
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
+  scope :born_in, lambda {|day, month|
+                    where("EXTRACT('day' FROM birthdate) || '-' || EXTRACT('month' FROM birthdate) = ?",
+                          "#{day}-#{month}")
+                  }
+
+  scope :consented_email_and_birthday_in, lambda {|day, month|
+                                            born_in(day, month).consented_to(Consent.find_by(key: "email"))
+                                          }
 
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx
@@ -77,6 +90,14 @@ class User < ApplicationRecord
 
   def consented_to?(key)
     consents.find_by(key: key)
+  end
+
+  def display_name
+    preferred_name || username
+  end
+
+  def valid_location
+    I18n.available_locales.include?(locale.to_sym) ? locale.to_sym : I18n.default_locale
   end
 
   private

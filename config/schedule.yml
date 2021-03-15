@@ -1,0 +1,4 @@
+birthday_job:
+    cron: "@daily"
+    class: "BirthdayEmailJob"
+    queue: default
