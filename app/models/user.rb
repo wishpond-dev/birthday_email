@@ -46,6 +46,10 @@ class User < ApplicationRecord
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
   scope :born_in, ->(day_of_year) { where("EXTRACT('doy' FROM birthdate) = ? ", day_of_year) }
 
+  scope :consented_email_and_birthday_in, lambda {|day_of_year|
+                                            born_in(day_of_year).consented_to(Consent.find_by(key: "email"))
+                                          }
+
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx
     compute_email_bidx
@@ -81,8 +85,12 @@ class User < ApplicationRecord
     consents.find_by(key: key)
   end
 
-  def email_username
+  def display_name
     preferred_name || username
+  end
+
+  def valid_location
+    I18n.available_locales.include?(locale.to_sym) ? locale.to_sym : I18n.default_locale
   end
 
   private

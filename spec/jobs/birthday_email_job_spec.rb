@@ -21,7 +21,7 @@ RSpec.describe BirthdayEmailJob, type: :job do
       end
 
       it "sends two emails" do
-        expect { described_class.perform_now(today.yday) }
+        expect { described_class.perform_now }
           .to change { ActionMailer::Base.deliveries.count }.by(2)
       end
     end
@@ -37,7 +37,7 @@ RSpec.describe BirthdayEmailJob, type: :job do
       end
 
       it "does not send emails" do
-        expect { described_class.perform_now(today.yday) }
+        expect { described_class.perform_now }
           .to change { ActionMailer::Base.deliveries.count }.by(0)
       end
     end
@@ -51,14 +51,14 @@ RSpec.describe BirthdayEmailJob, type: :job do
       end
 
       it "sends one email" do
-        expect { described_class.perform_now(today.yday) }
+        expect { described_class.perform_now }
           .to change { ActionMailer::Base.deliveries.count }.by(1)
       end
     end
 
     context "when no users born today" do
       it "does not send emails" do
-        expect { described_class.perform_now(today.yday) }
+        expect { described_class.perform_now }
           .to change { ActionMailer::Base.deliveries.count }.by(0)
       end
     end

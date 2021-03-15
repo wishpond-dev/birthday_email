@@ -72,13 +72,52 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "email_username" do
+  describe "consented_email_and_birthday_in" do
+    let(:born_in) { 1.day.ago }
+
+    context "when user born in the queried day and consented email" do
+      let(:user) { create :user, birthdate: born_in }
+      let(:user_consent) { create :user_consent, user: user, consented: true }
+      let(:consent) { user_consent.consent }
+
+      before { consent.update(key: "email") }
+
+      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to eq [user] }
+    end
+
+    context "when user born in the queried day and didn't consented email" do
+      let(:user) { create :user, birthdate: born_in }
+      let(:user_consent) { create :user_consent, user: user, consented: false }
+
+      before { user_consent.consent }
+
+      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to be_empty }
+    end
+
+    context "when user born in the queried day and consented name" do
+      let(:user) { create :user, birthdate: born_in }
+      let(:user_consent) { create :user_consent, user: user, consented: false }
+      let(:consent) { user_consent.consent }
+
+      before { consent.update(key: "name") }
+
+      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to be_empty }
+    end
+
+    context "when no user born in the queried day" do
+      before { create :user, birthdate: Time.zone.today }
+
+      it { expect(described_class.consented_email_and_birthday_in(born_in.yday)).to be_empty }
+    end
+  end
+
+  describe "display_name" do
     context "when user has preferred_name" do
       let(:preferred_name) { "preferred_name" }
 
       before { user.update(preferred_name: preferred_name) }
 
-      it { expect(user.email_username).to eq(preferred_name) }
+      it { expect(user.display_name).to eq(preferred_name) }
     end
 
     context "when user doesn't have preferred_name" do
@@ -86,7 +125,23 @@ RSpec.describe User, type: :model do
 
       before { user.update(preferred_name: nil, username: username) }
 
-      it { expect(user.email_username).to eq(username) }
+      it { expect(user.display_name).to eq(username) }
+    end
+  end
+
+  describe "valid_location" do
+    let(:born_in) { 1.day.ago }
+
+    context "when locate is a valid I18n location" do
+      let(:user) { create :user, birthdate: born_in, locale: "pt" }
+
+      it { expect(user.valid_location).to eq :pt }
+    end
+
+    context "when locate is an invalid I18n location" do
+      let(:user) { create :user, birthdate: born_in, locale: "de" }
+
+      it { expect(user.valid_location).to eq :en }
     end
   end
 end
