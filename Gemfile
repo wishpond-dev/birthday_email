@@ -89,6 +89,11 @@ group :test do
   gem "rspec-json_matcher"
   gem "shoulda-matchers"
 end
+group :production do
+  gem "daemons"
+end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem "delayed_job"
+gem "delayed_job_active_record"

@@ -1,0 +1,6 @@
+en:
+  birthday_mailer:
+    birthday_greeting:
+      subject: "Happy birthday greeting"
+      title: "Happy birthday %{username}!"
+      body: "I wish you a good day."

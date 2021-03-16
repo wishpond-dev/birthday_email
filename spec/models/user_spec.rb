@@ -54,4 +54,23 @@ RSpec.describe User, type: :model do
       it { expect(user).not_to be_consented_to(key) }
     end
   end
+
+  describe "birthday scope" do
+    let(:now) { Time.zone.now }
+    let(:birthday_users) { create_list(:birthday_user, 2) }
+    let(:no_birthday_users) { create_list(:no_birthday_user, 3) }
+
+    it "total birthday users" do
+      expect(birthday_users.size).to eq(2)
+      expect(User.birthday_on(now).size).to eq(2)
+    end
+    it "total no birthday users" do
+      expect(no_birthday_users.size).to eq(3)
+      expect(User.all.size - User.birthday_on(now).size).to eq(3)
+    end
+    it "total users" do
+      expect(birthday_users.size + no_birthday_users.size).to eq(5)
+      expect(User.all.size).to eq(5)
+    end
+  end
 end

@@ -33,4 +33,18 @@ FactoryBot.define do
     sequence(:preferred_name) {|n| "preferred_name#{n}" }
     birthdate { FFaker::Time.date }
   end
+
+  factory :birthday_user, class: User do
+    sequence(:username) {|n| "birthday_username#{n}" }
+    sequence(:email) {|n| "birthday_email#{n}@domain.com" }
+    sequence(:preferred_name) {|n| "birthday_preferred_name#{n}" }
+    birthdate { Time.zone.now }
+  end
+
+  factory :no_birthday_user, class: User do
+    sequence(:username) {|n| "no_birthday_username#{n}" }
+    sequence(:email) {|n| "no_birthday_email#{n}@domain.com" }
+    sequence(:preferred_name) {|n| "no_birthday_preferred_name#{n}" }
+    birthdate { Time.zone.now - 22.days }
+  end
 end
