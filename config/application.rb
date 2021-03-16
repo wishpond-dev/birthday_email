@@ -14,6 +14,7 @@ require 'action_view/railtie'
 require 'action_cable/engine'
 # require "sprockets/railtie"
 require 'rails/test_unit/railtie'
+require 'active_job'
 require_relative 'rails_env'
 
 # Require the gems listed in Gemfile, including any gems
@@ -47,5 +48,8 @@ module WhoIsDoingCodeReview
 
     config.i18n.fallbacks = true
     config.i18n.default_locale = :en
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end

@@ -1,11 +1,14 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: <%= ENV.fetch("DB_HOST") { '127.0.0.1' } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DB_USER") { 'postgres' } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { 'password' } %>
 
 development:
   <<: *default
-  database: who_is_doing_code_review_development
+  database: birthday_email_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -39,7 +42,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: who_is_doing_code_review_test
+  database: birthday_email_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -62,6 +65,6 @@ test:
 #
 production:
   <<: *default
-  database: who_is_doing_code_review_production
+  database: birthday_email_production
   username: who_is_doing_code_review
   password: <%= ENV['WHO_IS_DOING_CODE_REVIEW_DATABASE_PASSWORD'] %>
