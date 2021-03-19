@@ -33,4 +33,4 @@ en:
   hello: "Hello world"
   user_mailer:
     welcome:
-      subject: "Welcome to Rails Guides!"
+      subject: "Happy birthday!"
