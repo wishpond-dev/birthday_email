@@ -44,6 +44,8 @@ class User < ApplicationRecord
 
   scope :consented_to, ->(c) { joins(:user_consents).where(user_consents: {consent: c}) }
 
+  scope :birthday_today, -> {  where(birthdate: [Date.today.beginning_of_day..Date.today.end_of_day]) }
+
   # Required because the blind_index doesn't seem to like the email column
   def monkeypatch_email_bidx
     compute_email_bidx
