@@ -74,6 +74,8 @@ group :development, :test do
   gem "ruby-growl"
   gem "rubycritic"
   gem "uniform_notifier"
+
+  gem "faker"
 end
 
 group :development do
