@@ -77,7 +77,7 @@ group :development, :test do
   gem "uniform_notifier"
 
   gem "faker"
-  # gem 'whenever', require: false
+  gem 'whenever', require: false
 end
 
 group :development do
