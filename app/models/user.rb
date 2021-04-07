@@ -81,6 +81,10 @@ class User < ApplicationRecord
     consents.find_by(key: key)
   end
 
+  def send_birthday_wishes
+    SendUserBirthdayGreetingsJob.perform_later(self.id)
+  end
+
   private
 
   def set_uuid
