@@ -8,7 +8,7 @@ ruby "2.5.1"
 gem "dotenv-rails", groups: %i[development test], require: "dotenv/rails-now"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 5.2"
+gem "rails", "~> 5.2.5"
 
 gem "attr_encrypted" # and this we will use for per field encryption
 gem "blind_index"
@@ -46,6 +46,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
+gem 'sidekiq'
 
 group :development, :test do
   gem "annotate"
@@ -74,6 +75,9 @@ group :development, :test do
   gem "ruby-growl"
   gem "rubycritic"
   gem "uniform_notifier"
+
+  gem "faker"
+  gem 'whenever', require: false
 end
 
 group :development do
