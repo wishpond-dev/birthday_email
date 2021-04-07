@@ -54,4 +54,15 @@ RSpec.describe User, type: :model do
       it { expect(user).not_to be_consented_to(key) }
     end
   end
+
+  describe '#send_birthday_wishes' do
+    it 'enqueues the birthday greetings' do
+      allow(SendUserBirthdayGreetingsJob).to receive(:perform_later)
+      user = build(:user)
+
+      user.send_birthday_wishes
+
+      expect(SendUserBirthdayGreetingsJob).to  have_received(:perform_later)
+    end
+  end
 end
