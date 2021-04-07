@@ -15,5 +15,6 @@ Consent.first_or_create(key: 'email')
     user.birthdate = Faker::Date.between_except(from: 30.year.ago, to: 1.day.ago, excepted: Date.today)
   end
   user.consents << Consent.last if i.odd?
+  user.locale = [:en, :es, :fr].sample
   user.save
 end
