@@ -5,9 +5,14 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.birthday_greeting.subject
   #
-  def birthday_greeting
-    @user = User.new username: 'Nosfheratu', email: 'fher@mail.me'
+  def birthday_greeting user
+    @user = user
 
-    mail to: @user.email
+    I18n.with_locale(@user.locale) do
+      mail(
+        to: @user.email,
+        subject: I18n.t('user_mailer.subject.happy_birthday')
+      )
+    end
   end
 end

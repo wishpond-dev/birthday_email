@@ -29,10 +29,10 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+es:
   user_mailer:
     subject:
-      happy_birthday: Happy Birthday!
+      happy_birthday: Feliz Cumpleanos!
     body:
-      congratulations: Congratulations
-      we_want_to_wish: We want to wish you Happy Birthday!
+      congratulations: Felicitaciones
+      we_want_to_wish: Queremos desearte feliz cumpleaños!
